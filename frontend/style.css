@@ -55,6 +55,13 @@ body {
     color: #0a0a0a;
 }
 
+.logo-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #a3a3a3;
+    margin-left: 4px;
+}
+
 .status-indicator {
     display: flex;
     align-items: center;
