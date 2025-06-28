@@ -14,6 +14,7 @@ class EEGBLEController {
         this.initElements();
         this.bindEvents();
         this.initializeUI();
+        this.initializeSpeech();
     }
 
     initElements() {
@@ -199,12 +200,14 @@ class EEGBLEController {
                 this.menuActive = true;
                 this.currentSelection = 0;
                 this.log('Menu activated - waiting for selection', 'success');
+                this.speak('Menu activated. Please focus on an option.');
                 this.updateUI();
             } else if (command === 127) {
                 // Menu deactivated
                 this.menuActive = false;
                 this.currentSelection = 0;
                 this.log('Menu deactivated', 'info');
+                this.speak('Menu deactivated');
                 this.updateUI();
             }
         } else if (data.length === 2) {
@@ -214,12 +217,15 @@ class EEGBLEController {
             if (command === 'S') {
                 // Switch selection
                 this.currentSelection = value;
+                const optionName = this.getOptionName(value);
                 this.log(`Selection switched to option ${value}`, 'info');
+                this.speak(optionName); // 🧠 Speak when focused
                 this.updateUI();
             } else if (command === 'A') {
                 // Option selected
                 const optionName = this.getOptionName(value);
                 this.log(`Option selected: ${optionName}`, 'success');
+                this.speak(this.getOptionName(value));
                 this.showSelectionFeedback(value);
             }
         }
@@ -233,6 +239,7 @@ class EEGBLEController {
         
         const optionName = this.getOptionName(option);
         this.log(`Manual selection: ${optionName}`, 'success');
+        this.speak(optionName);
         this.showSelectionFeedback(option);
     }
 
@@ -297,6 +304,34 @@ class EEGBLEController {
                 btn.classList.remove('active');
             }
         });
+    }
+
+    initializeSpeech() {
+        // Initialize speech synthesis and log available voices
+        if ('speechSynthesis' in window) {
+            // Wait for voices to load
+            speechSynthesis.onvoiceschanged = () => {
+                const voices = speechSynthesis.getVoices();
+                this.log(`Speech synthesis initialized with ${voices.length} voices available`, 'info');
+                console.log('Available voices:', voices);
+            };
+        } else {
+            this.log('Speech Synthesis not supported in this browser.', 'error');
+        }
+    }
+
+    speak(text) {
+        if ('speechSynthesis' in window) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.volume = 1;
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            speechSynthesis.cancel(); // cancel any previous speech
+            speechSynthesis.speak(utterance);
+        } else {
+            this.log('Speech Synthesis not supported in this browser.', 'error');
+        }
     }
 }
 
