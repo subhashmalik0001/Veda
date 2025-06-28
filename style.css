@@ -234,55 +234,67 @@ body {
 }
 
 .menu-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;      /* Keep all cards in one row */
-    gap: 40px;              /* More space between cards */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
     justify-content: center;
     align-items: stretch;
     width: 100%;
     margin: 0 auto;
-    overflow-x: visible;    /* No horizontal scroll */
+    padding: 0 10px;
 }
 
 .menu-option {
-    flex: 1 1 0;            /* Each card grows equally to fill the row */
-    min-width: 220px;       /* Increased card size */
-    max-width: 300px;
-    font-size: 1.25rem;
-    padding: 36px 18px;
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    min-width: 180px;
+    max-width: 280px;
+    font-size: 1.1rem;
+    padding: 30px 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     background: rgba(38, 38, 38, 0.8);
-    border: 1px solid #262626;
+    border: 2px solid #262626;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     text-align: center;
     position: relative;
     overflow: hidden;
     cursor: pointer;
+    outline: none;
 }
 
 .menu-option:hover:not(:disabled) {
     background: rgba(55, 55, 55, 0.9);
-    border-color: #404040;
+    border-color: #4a9eff;
+    border-width: 2px;
     transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(74, 158, 255, 0.2);
+    outline: 2px solid #4a9eff;
+    outline-offset: 2px;
+}
+
+.menu-option:focus:not(:disabled) {
+    outline: 3px solid #4a9eff;
+    outline-offset: 2px;
+    border-color: #4a9eff;
 }
 
 .menu-option:disabled {
     opacity: 0.4;
     cursor: not-allowed;
     transform: none;
+    border-color: #404040;
 }
 
 .menu-option.active {
     background: rgba(255, 255, 255, 0.1);
     border-color: #ffffff;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    border-width: 3px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
 }
 
 .menu-option.active::before {
@@ -299,7 +311,10 @@ body {
 .menu-option.selected {
     background: rgba(34, 197, 94, 0.2);
     border-color: #22c55e;
+    border-width: 3px;
     box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+    outline: 3px solid #22c55e;
+    outline-offset: 2px;
 }
 
 @keyframes shine {
@@ -402,29 +417,36 @@ body {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .control-panel,
     .logs-panel {
-        padding: 24px;
+        padding: 20px;
     }
 
     .menu-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
+        padding: 0 5px;
     }
 
     .menu-option {
-        padding: 20px 16px;
+        padding: 24px 12px;
+        min-width: 140px;
+        font-size: 1rem;
     }
 
     .menu-option-icon {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .menu-option-label {
+        font-size: 0.9rem;
     }
 
     .menu-status {
@@ -433,13 +455,47 @@ body {
         text-align: center;
     }
 }
+
 @media (max-width: 480px) {
     .menu-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0;
+    }
+
+    .menu-option {
+        padding: 20px 8px;
+        min-width: 120px;
+        font-size: 0.9rem;
+    }
+
+    .menu-option-icon {
+        font-size: 1.1rem;
+    }
+
+    .menu-option-label {
+        font-size: 0.8rem;
     }
 
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .control-panel,
+    .logs-panel {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .menu-option {
+        max-width: none;
+        min-width: auto;
     }
 }
 
