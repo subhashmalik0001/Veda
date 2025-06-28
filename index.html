@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEG BLE Control</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🧠</div>
+                <span>NeuroGaze</span>
+            </div>
+            <div id="status" class="status-indicator disconnected">
+                <div class="status-dot"></div>
+                <span>Disconnected</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <h1 class="hero-title">Every Blink Matters: Empowering Silent Voices with Focus & Blink Tech</h1>
+            <p class="hero-subtitle">Advanced brain-computer interface for seamless communication and control through neural signals</p>
+            <button id="connectBtn" class="connect-button">
+                <span>⚡</span>
+                Connect Device
+            </button>
+        </section>
+
+        <section class="control-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Neural Menu System</h2>
+                <p class="panel-description">Use double blink to activate the menu, then double blink to select the desired option and focus to make a selection.</p>
+            </div>
+
+            <div class="menu-status">
+                <div class="menu-status-text">
+                    <div class="menu-status-label">Menu Status</div>
+                    <div class="menu-status-value" id="menuStatus">Inactive</div>
+                </div>
+                <div style="font-size: 1.5rem;">🎯</div>
+            </div>
+
+            <div class="menu-grid">
+                <button class="menu-option" data-option="1" disabled>
+                    <div class="menu-option-icon">🍽️</div>
+                    <div class="menu-option-label">Food</div>
+                </button>
+                <button class="menu-option" data-option="2" disabled>
+                    <div class="menu-option-icon">💧</div>
+                    <div class="menu-option-label">Water</div>
+                </button>
+                <button class="menu-option" data-option="3" disabled>
+                    <div class="menu-option-icon">🚽</div>
+                    <div class="menu-option-label">Washroom</div>
+                </button>
+                <button class="menu-option" data-option="4" disabled>
+                    <div class="menu-option-icon">🆘</div>
+                    <div class="menu-option-label">Help</div>
+                </button>
+                <button class="menu-option" data-option="5" disabled>
+                    <div class="menu-option-icon">🎮</div>
+                    <div class="menu-option-label">Entertainment</div>
+                </button>
+                <button class="menu-option" data-option="6" disabled>
+                    <div class="menu-option-icon">💨</div>
+                    <div class="menu-option-label">Air Control</div>
+                </button>
+            </div>
+        </section>
+
+        <section class="logs-panel">
+            <div class="logs-header">
+                <h3 class="logs-title">System Logs</h3>
+            </div>
+            <div class="logs-container" id="logs">
+                <div class="log-entry info">System initialized - Ready to connect...</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>NeuroLink EEG Control System • Advanced Neural Interface Technology</p>
+        </footer>
+    </main>
+
+    <script src="js/script.js"></script> <!-- if inside a 'js' folder -->
+
+</body>
+</html>
